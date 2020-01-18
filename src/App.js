@@ -1,25 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { access_token, playlist_id } from './secrets';
 
 function App() {
+  const [tracks, setTracks] = useState([]);
+  const [currentTrack, setCurrentTrack] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <h1>Rock 'n' Roll! 🎶</h1>
+      <button>Get new song</button>
+      <h2>{currentTrack?.song}</h2>
+      <h3>{currentTrack?.artist}</h3>
+    </React.Fragment>
   );
 }
 

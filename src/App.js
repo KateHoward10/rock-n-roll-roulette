@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { usePalette } from 'react-palette';
 import './App.css';
 import { client_id, redirect_uri, playlist_id } from './secrets';
 
@@ -7,6 +8,7 @@ function App() {
   const [currentTrack, setCurrentTrack] = useState({});
   const [token, setToken] = useState(null);
   const scopes = ['user-read-currently-playing', 'user-read-playback-state'];
+  const { data } = usePalette(currentTrack?.image);
 
   function generate() {
     if (tracks?.length) {
@@ -83,7 +85,7 @@ function App() {
   }, [token]);
 
   return (
-    <div className="App">
+    <div className="App" style={{ background: data?.lightMuted || 'lightgrey' }}>
       {token ? (
         <React.Fragment>
           <button onClick={generate}>

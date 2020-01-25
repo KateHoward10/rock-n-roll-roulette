@@ -31,6 +31,7 @@ function App() {
               return {
                 song: item.track.name,
                 artist: item.track.artists.map(artist => artist.name).join(', '),
+                image: item.track?.album?.images[0]?.url,
                 uri: item.track.uri
               };
             });
@@ -90,11 +91,12 @@ function App() {
         </span>
       </h1>
       {token ? (
-        <div>
+        <React.Fragment>
           <button onClick={generate}>Get new song</button>
+          {currentTrack?.image && <img src={currentTrack.image} alt={currentTrack?.song} />}
           <h2>{currentTrack?.song}</h2>
           <h3>{currentTrack?.artist}</h3>
-        </div>
+        </React.Fragment>
       ) : (
         <button onClick={event => handleRedirect(event)}>
           <strong>Log in to Spotify</strong>

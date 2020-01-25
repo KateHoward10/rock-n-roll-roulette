@@ -84,21 +84,21 @@ function App() {
 
   return (
     <div className="App">
-      <h1>
-        Rock 'n' Roll!{' '}
-        <span role="img" aria-label="musical notes">
-          🎶
-        </span>
-      </h1>
       {token ? (
         <React.Fragment>
-          <button onClick={generate}>Get new song</button>
+          <button onClick={generate}>
+            <span role="img" aria-label="musical notes">
+              🎶
+            </span>
+            Get new song
+          </button>
           {currentTrack?.image && <img src={currentTrack.image} alt={currentTrack?.song} />}
           <h2>{currentTrack?.song}</h2>
           <h3>{currentTrack?.artist}</h3>
+          {currentTrack?.uri && <a href={currentTrack.uri}>Listen on Spotify...</a>}
         </React.Fragment>
       ) : (
-        <button onClick={event => handleRedirect(event)}>
+        <button onClick={handleRedirect}>
           <strong>Log in to Spotify</strong>
         </button>
       )}

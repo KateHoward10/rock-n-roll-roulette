@@ -1,8 +1,16 @@
 .App {
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
+}
+
+button {
+  font-size: 18px;
+  border-radius: 2px;
+  box-shadow: 0 0 6px grey;
 }
 
 img {
@@ -10,4 +18,12 @@ img {
   width: 200px;
   height: 200px;
   margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 6px grey;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+  font-style: italic;
 }

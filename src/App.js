@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { usePalette } from 'react-palette';
 import './App.css';
 
@@ -8,7 +8,6 @@ function App() {
   const [token, setToken] = useState(null);
   const scopes = ['user-read-currently-playing', 'user-read-playback-state'];
   const { data } = usePalette(currentTrack?.image);
-  console.log(process.env.REACT_APP_REDIRECT_URI);
 
   function generate() {
     if (tracks?.length) {
@@ -16,7 +15,7 @@ function App() {
     }
   }
 
-  function getAllTracks() {
+  const getAllTracks = useCallback((token) => {
     const endpoint = `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks`;
     if (token) {
       fetch(endpoint, {
@@ -41,7 +40,7 @@ function App() {
           }
         });
     }
-  }
+  }, []);
 
   function generateRandomString(length) {
     let text = '';
@@ -80,9 +79,7 @@ function App() {
     setToken(token);
   }, []);
 
-  useEffect(() => {
-    if (token) getAllTracks();
-  }, [token]);
+  useEffect(() => getAllTracks(token));
 
   return (
     <div className="App" style={{ background: data?.lightMuted || 'lightgrey' }}>

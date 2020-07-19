@@ -1,9 +1,6 @@
 {
   "name": "rock-n-roll-roulette",
   "version": "0.1.0",
-  "engines": {
-    "node": "8.16.0"
-  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -13,7 +10,7 @@
     "react-dev-utils": "^10.0.0",
     "react-dom": "^16.12.0",
     "react-palette": "^1.0.1",
-    "react-scripts": "3.3.0"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

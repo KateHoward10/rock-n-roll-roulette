@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { usePalette } from 'react-palette';
 import './App.css';
-import { client_id, redirect_uri, playlist_id } from './secrets';
 
 function App() {
   const [tracks, setTracks] = useState([]);
@@ -9,6 +8,7 @@ function App() {
   const [token, setToken] = useState(null);
   const scopes = ['user-read-currently-playing', 'user-read-playback-state'];
   const { data } = usePalette(currentTrack?.image);
+  console.log(process.env.REACT_APP_REDIRECT_URI);
 
   function generate() {
     if (tracks?.length) {
@@ -17,7 +17,7 @@ function App() {
   }
 
   function getAllTracks() {
-    const endpoint = `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`;
+    const endpoint = `https://api.spotify.com/v1/playlists/${process.env.REACT_APP_PLAYLIST_ID}/tracks`;
     if (token) {
       fetch(endpoint, {
         method: 'get',
@@ -70,7 +70,7 @@ function App() {
     const token = params.access_token;
     setToken(token);
     const state = generateRandomString(16);
-    const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${client_id}&scope=${scopes}&redirect_uri=${redirect_uri}&state=${state}`;
+    const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${process.env.REACT_APP_CLIENT_ID}&scope=${scopes}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&state=${state}`;
     window.location = url;
   }
 
